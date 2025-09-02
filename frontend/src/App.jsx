@@ -16,8 +16,13 @@ function App() {
   //tanstack reat query
   const { isLoading, authUser } = useAuthUser();
 
+  console.log(authUser);
+
   const isAuthenticated = Boolean(authUser);
-  const isOnBoarded = authUser?.isOnboarded;
+  const isOnBoarded = authUser?.isOnboarded === "true";
+
+  console.log(isAuthenticated);
+  console.log(isOnBoarded);
 
   if (isLoading) {
     return <PageLoader />;

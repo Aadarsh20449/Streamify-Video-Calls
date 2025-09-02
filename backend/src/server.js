@@ -16,11 +16,21 @@ const PORT = process.env.PORT || 5001;
 
 const __dirname = path.resolve();
 
-// Enable CORS
+const allowedOrigins =
+  process.env.NODE_ENV === "development"
+    ? ["http://localhost:5173"]
+    : ["https://streamify-video-calls-2-aht0.onrender.com"]; // your deployed frontend
+
 app.use(
   cors({
-    origin:
-      process.env.NODE_ENV === "development" ? "http://localhost:5173" : "*",
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true); // allow server-to-server requests or Postman
+      if (allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
