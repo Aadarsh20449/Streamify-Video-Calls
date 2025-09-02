@@ -40,7 +40,7 @@ function App() {
                     ? "/login"
                     : !isOnBoarded
                     ? "/onboarding"
-                    : "/home"
+                    : "/"
                 }
               />
             )
